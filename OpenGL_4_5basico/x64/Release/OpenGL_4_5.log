@@ -1,0 +1,18 @@
+﻿  Source.cpp
+Source.obj : error LNK2001: unresolved external symbol __imp___glewEnableVertexAttribArray
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBindVertexArray
+Source.obj : error LNK2001: unresolved external symbol __imp___glewUseProgram
+Source.obj : error LNK2001: unresolved external symbol __imp___glewVertexAttribPointer
+Source.obj : error LNK2001: unresolved external symbol __imp___glewCompileShader
+Source.obj : error LNK2001: unresolved external symbol __imp___glewCreateShader
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBindBuffer
+Source.obj : error LNK2001: unresolved external symbol __imp___glewCreateProgram
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBufferData
+Source.obj : error LNK2001: unresolved external symbol __imp___glewAttachShader
+Source.obj : error LNK2001: unresolved external symbol __imp___glewShaderSource
+Source.obj : error LNK2001: unresolved external symbol __imp___glewGenVertexArrays
+Source.obj : error LNK2001: unresolved external symbol __imp_glewExperimental
+Source.obj : error LNK2001: unresolved external symbol __imp___glewGenBuffers
+Source.obj : error LNK2001: unresolved external symbol __imp___glewLinkProgram
+Source.obj : error LNK2001: unresolved external symbol __imp_glewInit
+D:\Users\2105\documents\visual studio 2015\Projects\OpenGL_test\x64\Release\OpenGL_4_5.exe : fatal error LNK1120: 16 unresolved externals
