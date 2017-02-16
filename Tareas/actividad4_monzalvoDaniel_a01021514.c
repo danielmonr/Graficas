@@ -1,3 +1,15 @@
+/* ============================================
+ * Author: Daniel Monzalvo Rodriguez
+ * ID: A01021514
+ *
+ * Actividad 4 | Graficas Computacionales
+ *
+ * ITESM, CSF
+ *
+ * 15-02-17
+ * ============================================
+*/
+
 #include <GL/glut.h>
 #include <stdlib.h>
 
