@@ -1,12 +1,15 @@
 #include <GL/glut.h>
 #include <stdlib.h>
 
+
+/* Values that will control the movement of the planets around the sun and themselves */
 static int mer = 0, mer_d = 0, ven = 0, ven_d = 0, tie = 0, tie_d = 0, mar = 0, mar_d = 0;
 static int jup = 0, jup_d = 0, sat = 0, sat_d = 0, ura = 0, ura_d = 0, nep = 0, nep_d = 0;
-static char move = 0;
+static char move = 1;
 static int close = 3;
 static int moons = 0;
 
+// Function to draw the sun
 void sun(){
     glPushMatrix();
         glDisable(GL_LIGHT0); // Disable ambient light
@@ -38,17 +41,20 @@ void sun(){
     glPopMatrix();
 }
 
+/* Structures of the solar system */
+// Rings structure
 struct anillo{
-    float ri;
-    float re;
-    float alt;
-    float r;
-    float g;
-    float b;
-    float ang;
+    float ri; // internal radius
+    float re; // external radius
+    float alt; // height
+    float r; // red
+    float g; // green
+    float b; // blue
+    float ang; // angle of rotation around x
 };
 typedef struct anillo anillo_t;
 
+/* Rings constructor */
 anillo_t ring(float ang, float ri, float re, float alt, float r, float g, float b){
     anillo_t a;
     a.ri = ri;
@@ -61,6 +67,7 @@ anillo_t ring(float ang, float ri, float re, float alt, float r, float g, float 
     return a;
 }
 
+/* Function to draw rings */
 void draw_r(anillo_t a){
     glPushMatrix();
         glRotatef(a.ang, 1.0, 0.0, 0.0);
@@ -77,27 +84,30 @@ void draw_r(anillo_t a){
     glPopMatrix();
 }
 
+/* planets and moons structure */
 struct planeta{
-    float x;
-    float y;
-    float z;
-    float r;
-    float g;
-    float b;
-    float rad;
-    anillo_t* a;
-    struct planeta* m;
-    struct planeta* m2;
+    float x; // position in x
+    float y; // position in y
+    float z; // position in z
+    float r; // red
+    float g; // green
+    float b; // blue
+    float rad; // radius
+    anillo_t* a; // ring
+    struct planeta* m; // moon 1
+    struct planeta* m2; // moon 2
 };
 typedef struct planeta planeta_t;
 
+/* planet constructor */
 planeta_t planet(float x, float y, float z, float rad, float r, float g, float b){
     planeta_t p;
     p.x = x; p.y = y; p.z = z; p.rad = rad; p.r = r; p.g = g; p.b = b;
-    p.a = NULL; p.m = NULL, p.m2 = NULL;
+    p.a = NULL; p.m = NULL, p.m2 = NULL; // set default moons and rings to NULL
     return p;
 }
 
+// Draw planets and moons
 void draw_p(planeta_t p, float angulo){
     glPushMatrix();
         glTranslatef(p.x, p.y, p.z);
@@ -120,11 +130,12 @@ void draw_p(planeta_t p, float angulo){
         }
         if(p.m2 != NULL){
             glRotatef(moons, 0.0, 1.0, 0.0);
-            draw_p(*p.m2, 10); // If has moon draw moon
+            draw_p(*p.m2, 10); // If has moon 2 draw moon 2
         }
     glPopMatrix();
 }
 
+/* Function to display planets */
 void display_panet(planeta_t p, float year, float day){
     glPushMatrix();
         glRotatef(year, 0.0, 1.0, 0.0); // planet's rotation around the sun
@@ -140,6 +151,7 @@ void display(void)
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
 
+    /* Create planets with their moons and rings */
     planeta_t mercury = planet(1.15, 0.0, 0.0, 0.05, 0.66, 0.66, 0.66); // Create mercury
     planeta_t venus = planet(1.4, 0.0, 0.0, 0.1, 0.6, 0.1, 0.0); // Create Venus
     planeta_t tierra = planet(1.62, 0.0, 0.0, 0.1, 0.0, 0.8, 0.1); // Create Earth
@@ -178,19 +190,21 @@ void display(void)
     glFlush();
 }
 
+/* function to initialize opengl scene */
 void init(void) 
 {
-    GLfloat mat_ambient[] = { 0.2, 0.2, 0.0, 1.0 };
-    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat mat_diffuse[] = {1.0, 1.0, 1.0, 1.0};
-    GLfloat mat_light_ambient[] = {0.0, 0.0, 0.0, 1.0};
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    // Set light's configuration
+    GLfloat mat_ambient[] = { 0.2, 0.2, 0.0, 1.0 }; // Low yellow ambient light
+    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 }; // white specular light
+    GLfloat mat_diffuse[] = {1.0, 1.0, 1.0, 1.0}; // white diffuse light
+    GLfloat mat_light_ambient[] = {0.0, 0.0, 0.0, 1.0}; // black ambient
+    glEnable(GL_DEPTH_TEST); // activate depth
+    glDepthFunc(GL_LESS); // set depth function
 
+    // Set LIGHT0 settings
    glLightfv(GL_LIGHT0, GL_SPECULAR, mat_specular);
    glLightfv(GL_LIGHT0, GL_DIFFUSE, mat_diffuse);
    glLightfv(GL_LIGHT0, GL_AMBIENT, mat_ambient);
-   //glLightfv(GL_LIGHT0, GL_POSITION, position);
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, mat_light_ambient);
 
    
@@ -200,14 +214,16 @@ void init(void)
 }
 
 static int cont = 0;
+/* Function to run on background */
 void simulacion(){
     int x = 15;
     if(!move)
         return;
-    if(cont != 100000){
+    if(cont != 100000){ // set velocity
         cont = cont+1;
         return;
     }
+    /* Movements proportional to the earth rotation */
     mer = (mer+(x*40))%360;
     tie = (tie+(x*10))%360;
     ven = (ven+(x*20))%360;
@@ -222,18 +238,19 @@ void simulacion(){
     glutPostRedisplay();
 }
 
+// Reshape function
 void reshape (int w, int h)
 {
    glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
-   glMatrixMode (GL_PROJECTION);
+   glMatrixMode (GL_PROJECTION); // Projection mode
    glLoadIdentity ();
-   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 1000.0);
+   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 1000.0); // set perspective configuration
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   gluLookAt (0.0, 3, 5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+   gluLookAt (0.0, 3, 5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Camera settings
 }
 
-/* ARGSUSED1 */
+/* Keys actions */
 void keyboard (unsigned char key, int x, int y)
 {
    switch (key) {
@@ -246,10 +263,10 @@ void keyboard (unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case ' ':
-        move = !move;
+        move = !move; // space to pause all movement
         break;
     case 27:
-        exit(0);
+        exit(0); // Escape to exit program
         break;
     default:
          break;

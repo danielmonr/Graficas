@@ -10,5 +10,5 @@ act2: tarea1.c
 act3: tarea2.c
 	gcc -o act3 tarea2.c -lGL -lGLU -lglut
 
-act4: tarea4.c
-	gcc -o act4 tarea4.c -lGL -lGLU -lglut
+act4: actividad4_monzalvoDaniel_a01021514.c
+	gcc -o act4 actividad4_monzalvoDaniel_a01021514.c -lGL -lGLU -lglut
