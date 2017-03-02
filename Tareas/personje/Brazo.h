@@ -5,6 +5,7 @@ class Brazo{
   public:
     Brazo(float, float, float, float, float, float, bool);
     ~Brazo();
+    void Draw();
     void createUp();
     void createMiddle();
     void createDown();

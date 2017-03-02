@@ -4,8 +4,15 @@ Brazo::Brazo(float x, float y, float z, float r, float g, float b, bool lf){
   pos_x = x; pos_y = y; pos_z = z;
   cs_r = r; cs_g = g; cs_b = b;
   left = (lf)? -1.0 : 1.0;
-  std::cout << "Creando Brazo\n";
+  //std::cout << "Creando Brazo\n";
   qobj = gluNewQuadric();
+}
+
+Brazo::~Brazo(){
+  //delete qobj;
+}
+
+void Brazo::Draw(){
   glPushMatrix();
     glTranslatef(left*pos_x, pos_y, pos_z);
     glRotatef(left*49.0, 0.0, 0.0, 1.0);
@@ -14,12 +21,8 @@ Brazo::Brazo(float x, float y, float z, float r, float g, float b, bool lf){
   glPopMatrix();
 }
 
-Brazo::~Brazo(){
-  //delete qobj;
-}
-
 void Brazo::createDown(){
-  std::cout << "Parte de abajo\n";
+  //std::cout << "Parte de abajo\n";
   glPushMatrix();
     GLfloat color[] = {skin_r, skin_g, skin_b, 1.0};
     GLfloat mat_shiness[] = {128.0};
@@ -34,7 +37,7 @@ void Brazo::createDown(){
 }
 
 void Brazo::createUp(){
-  std::cout << "Parte de arriba\n";
+  //std::cout << "Parte de arriba\n";
   glPushMatrix();
     GLfloat color[] = {cs_r, cs_g, cs_b, 1.0};
     GLfloat mat_shiness[] = {128.0};
@@ -48,7 +51,7 @@ void Brazo::createUp(){
 }
 
 void Brazo::createMiddle(){
-  std::cout << "Parte de en medio.\n";
+  //std::cout << "Parte de en medio.\n";
   glPushMatrix();
     glTranslatef(0.0, 0.0, -0.7);
     GLfloat color[] = {skin_r, skin_g, skin_b, 1.0};

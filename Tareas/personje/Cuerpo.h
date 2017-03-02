@@ -9,6 +9,11 @@ class Cuerpo{
     Cuerpo(float, float, float);
     ~Cuerpo();
     void setColorShirt(float, float, float);
+    void neckUp();
+    void neckDown();
+    void neckLeft();
+    void neckRight();
+    void Draw();
     GLUquadric* qobj;
   private:
     /* Position of the carachter */
@@ -32,4 +37,9 @@ class Cuerpo{
     Brazo* r_arm;
     Pierna* l_leg;
     Pierna* r_leg;
+    /* Rotation Angles Neck */
+    float a_n_sides = 0;
+    float a_n_front = 0;
+    float a_n_sides_max = 20;
+    float a_n_front_max = 20;
 };

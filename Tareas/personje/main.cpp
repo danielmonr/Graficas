@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Cuerpo.h"
 
+Cuerpo* carachter = new Cuerpo(0,0,0);;
+
 void display(){
   GLfloat l_position[] = {0.0, 0.0, 2.0, 1.0};
   glLightfv(GL_LIGHT0, GL_POSITION, l_position);
@@ -10,7 +12,7 @@ void display(){
   glColor3f (1.0, 1.0, 1.0);
 
   glPushMatrix();
-    Cuerpo* personaje = new Cuerpo(0,0,0);
+    carachter->Draw();
   glPopMatrix();
 
   glutSwapBuffers();
@@ -44,11 +46,27 @@ void reshape(int w, int h){
   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 1000.0); // set perspective configuration
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt (0.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Camera settings
+  gluLookAt (0.0, 0.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Camera settings
 }
 
 void keyboard(unsigned char key, int x, int y){
   switch (key){
+    case 'n':
+      carachter->neckDown();
+      glutPostRedisplay();
+      break;
+    case 'N':
+      carachter->neckUp();
+      glutPostRedisplay();
+      break;
+    case 'm':
+      carachter->neckLeft();
+      glutPostRedisplay();
+      break;
+    case 'M':
+      carachter->neckRight();
+      glutPostRedisplay();
+      break;
     case 27:
       exit(0);
       break;

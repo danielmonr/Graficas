@@ -5,6 +5,7 @@ class Pierna{
   public:
     Pierna(float, float, float, float, float, float, bool);
     ~Pierna();
+    void Draw();
     void createUp();
     void createMiddle();
     void createDown();

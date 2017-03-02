@@ -8,16 +8,26 @@ Cuerpo::Cuerpo(float x, float y, float z){
   c_g = 0.0;
   c_b = 0.0;
   qobj = gluNewQuadric();
-  glPushMatrix();
-    glTranslatef(pos_x, pos_y, pos_z);
-    createTorso();
-    createLLeg();
-    createRLeg();
-  glPopMatrix();
+  createLLeg();
+  createRLeg();
+  createLArm();
+  createRArm();
 }
 
 Cuerpo::~Cuerpo(){
+  delete l_arm;
+  delete r_arm;
+  delete l_leg;
+  delete r_leg;
+}
 
+void Cuerpo::Draw(){
+  glPushMatrix();
+    glTranslatef(pos_x, pos_y, pos_z);
+    createTorso();
+    l_leg->Draw();
+    r_leg->Draw();
+  glPopMatrix();
 }
 
 void Cuerpo::setColorShirt(float r, float g, float b){
@@ -26,6 +36,9 @@ void Cuerpo::setColorShirt(float r, float g, float b){
 
 void Cuerpo::createNeck(){
   glPushMatrix();
+    glRotatef(a_n_front, 1.0, 0.0, 0.0);
+    //std::cout << "n_sides" << a_n_sides << "\n";
+    glRotatef(a_n_sides, 0.0, 0.0, 1.0);
     glTranslatef(0.0, 1.45, 0.0);
     glRotatef(90, 1.0, 0.0, 0.0);
     GLfloat color[] = {0.88235,0.67451, 0.58824, 1.0};
@@ -70,7 +83,7 @@ void Cuerpo::createLLeg(){
 }
 
 void Cuerpo::createTorso(){
-  std::cout << "Drawing torso\n";
+  //std::cout << "Drawing torso\n";
   glPushMatrix();
     GLfloat color[] = {c_r, c_g, c_b, 1.0};
     GLfloat mat_shiness[] = {128.0};
@@ -80,7 +93,31 @@ void Cuerpo::createTorso(){
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shiness);
     glutSolidSphere(1.0, 50, 50);
     createNeck();
-    createLArm();
-    createRArm();
+    l_arm->Draw();
+    r_arm->Draw();
   glPopMatrix();
+}
+
+void Cuerpo::neckUp(){
+  std::cout << "Neck up " << a_n_front <<"\n";
+  if(a_n_front > 0)
+    a_n_front--;
+}
+
+void Cuerpo::neckDown(){
+  std::cout << "Neck down" << a_n_front << "\n";
+  if(a_n_front < a_n_front_max)
+    a_n_front++;
+}
+
+void Cuerpo::neckLeft(){
+  if(a_n_sides < a_n_sides_max)
+    a_n_sides++;
+  std::cout << "Neck Left " << a_n_sides << "\n";
+}
+
+void Cuerpo::neckRight(){
+  if(a_n_sides > -1*a_n_sides_max)
+    a_n_sides--;
+  std::cout << "Neck Right " << a_n_sides << "\n";
 }
