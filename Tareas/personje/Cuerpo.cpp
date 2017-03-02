@@ -13,9 +13,6 @@ Cuerpo::Cuerpo(float x, float y, float z){
     createTorso();
     createLLeg();
     createRLeg();
-    createLArm();
-    createRArm();
-    createHead();
   glPopMatrix();
 }
 
@@ -29,18 +26,31 @@ void Cuerpo::setColorShirt(float r, float g, float b){
 
 void Cuerpo::createNeck(){
   glPushMatrix();
-    GLfloat color[] = {cs_r, cs_g, cs_b, 1.0};
+    glTranslatef(0.0, 1.45, 0.0);
+    glRotatef(90, 1.0, 0.0, 0.0);
+    GLfloat color[] = {0.88235,0.67451, 0.58824, 1.0};
     GLfloat mat_shiness[] = {128.0};
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shiness);
-    gluCylinder(qobj, 0.3, 0.4, 1, 50, 50);
+    gluCylinder(qobj, 0.3, 0.3, 0.5, 50, 50);
+    createHead();
   glPopMatrix();
 }
 
 void Cuerpo::createHead(){
-
+  glPushMatrix();
+    glTranslatef(0.0, 0.0, -0.38);
+    glRotatef(90, 1.0, 0.0, 0.0);
+    GLfloat color[] = {0.88235,0.67451, 0.58824, 1.0};
+    GLfloat mat_shiness[] = {128.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shiness);
+    glutSolidSphere(0.5, 50, 50);
+  glPopMatrix();
 }
 
 void Cuerpo::createRArm(){
@@ -68,9 +78,9 @@ void Cuerpo::createTorso(){
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shiness);
-    glRotatef(30.0, 0.0, 0.0, 1.0);
-    glRotatef(21.0, 0.0,1.0,0.0);
-    //glutSolidDodecahedron();
     glutSolidSphere(1.0, 50, 50);
+    createNeck();
+    createLArm();
+    createRArm();
   glPopMatrix();
 }

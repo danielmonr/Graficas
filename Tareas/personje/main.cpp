@@ -44,7 +44,7 @@ void reshape(int w, int h){
   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 1000.0); // set perspective configuration
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Camera settings
+  gluLookAt (0.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); // Camera settings
 }
 
 void keyboard(unsigned char key, int x, int y){
