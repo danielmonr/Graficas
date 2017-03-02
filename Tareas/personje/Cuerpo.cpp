@@ -121,3 +121,66 @@ void Cuerpo::neckRight(){
     a_n_sides--;
   std::cout << "Neck Right " << a_n_sides << "\n";
 }
+
+void Cuerpo::legsUp(){
+  l_leg->legUp();
+  r_leg->legUp();
+}
+void Cuerpo::legsDown(){
+  l_leg->legDown();
+  r_leg->legDown();
+}
+void Cuerpo::legsOpen(){
+  l_leg->legOpen();
+  r_leg->legOpen();
+}
+void Cuerpo::legsClose(){
+  l_leg->legClose();
+  r_leg->legClose();
+}
+
+void Cuerpo::bendknees(){
+  l_leg->bendKnee();
+  r_leg->bendKnee();
+}
+void Cuerpo::extendKnees(){
+  l_leg->extendKnee();
+  r_leg->extendKnee();
+}
+
+void Cuerpo::armsDown(){
+  l_arm->armDown();
+  r_arm->armDown();
+}
+void Cuerpo::armsUp(){
+  l_arm->armUp();
+  r_arm->armUp();
+}
+void Cuerpo::armsFront(){
+  l_arm->armFront();
+  r_arm->armFront();
+}
+void Cuerpo::armsBack(){
+  l_arm->armBack();
+  r_arm->armBack();
+}
+
+void Cuerpo::armsExtend(){
+  l_arm->middleDown();
+  r_arm->middleDown();
+}
+
+void Cuerpo::armsBend(){
+  l_arm->middleUp();
+  r_arm->middleUp();
+}
+
+void Cuerpo::armsRot(){
+  l_arm->middleR();
+  r_arm->middleR();
+}
+
+void Cuerpo::armsLot(){
+  l_arm->middleL();
+  r_arm->middleL();
+}

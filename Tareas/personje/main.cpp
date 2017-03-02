@@ -67,6 +67,62 @@ void keyboard(unsigned char key, int x, int y){
       carachter->neckRight();
       glutPostRedisplay();
       break;
+    case 'l':
+      carachter->legsDown();
+      glutPostRedisplay();
+      break;
+    case 'L':
+      carachter->legsUp();
+      glutPostRedisplay();
+      break;
+    case 'o':
+      carachter->legsClose();
+      glutPostRedisplay();
+      break;
+    case 'O':
+      carachter->legsOpen();
+      glutPostRedisplay();
+      break;
+    case 'k':
+      carachter->bendknees();
+      glutPostRedisplay();
+      break;
+    case 'K':
+      carachter->extendKnees();
+      glutPostRedisplay();
+      break;
+    case 'a':
+      carachter->armsUp();
+      glutPostRedisplay();
+      break;
+    case 'A':
+      carachter->armsDown();
+      glutPostRedisplay();
+      break;
+    case 'f':
+      carachter->armsFront();
+      glutPostRedisplay();
+      break;
+    case 'F':
+      carachter->armsBack();
+      glutPostRedisplay();
+      break;
+    case 'e':
+      carachter->armsBend();
+      glutPostRedisplay();
+      break;
+    case 'E':
+      carachter->armsExtend();
+      glutPostRedisplay();
+      break;
+    case 'w':
+      carachter->armsRot();
+      glutPostRedisplay();
+      break;
+    case 'W':
+      carachter->armsLot();
+      glutPostRedisplay();
+      break;
     case 27:
       exit(0);
       break;

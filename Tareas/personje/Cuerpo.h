@@ -13,6 +13,20 @@ class Cuerpo{
     void neckDown();
     void neckLeft();
     void neckRight();
+    void legsUp();
+    void legsDown();
+    void legsOpen();
+    void legsClose();
+    void bendknees();
+    void extendKnees();
+    void armsDown();
+    void armsUp();
+    void armsFront();
+    void armsBack();
+    void armsExtend();
+    void armsBend();
+    void armsRot();
+    void armsLot();
     void Draw();
     GLUquadric* qobj;
   private:

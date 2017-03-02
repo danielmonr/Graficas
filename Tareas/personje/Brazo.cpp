@@ -39,6 +39,8 @@ void Brazo::createDown(){
 void Brazo::createUp(){
   //std::cout << "Parte de arriba\n";
   glPushMatrix();
+    glRotatef(left*a_a_front, 0.0, 1.0, 0.0);
+    glRotatef(a_a_up, 1.0, 0.0, 0.0);
     GLfloat color[] = {cs_r, cs_g, cs_b, 1.0};
     GLfloat mat_shiness[] = {128.0};
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
@@ -53,6 +55,8 @@ void Brazo::createUp(){
 void Brazo::createMiddle(){
   //std::cout << "Parte de en medio.\n";
   glPushMatrix();
+    glRotatef(a_e_up, 1.0, 0.0, 0.0);
+    glRotatef(a_e_r, 0.0, 0.0, 1.0);
     glTranslatef(0.0, 0.0, -0.7);
     GLfloat color[] = {skin_r, skin_g, skin_b, 1.0};
     GLfloat mat_shiness[] = {128.0};
@@ -68,4 +72,44 @@ void Brazo::setColorShirt(float r, float g, float b){
   cs_r = r;
   cs_g = g;
   cs_b = b;
+}
+
+void Brazo::armUp(){
+  if(a_a_up < a_a_up_max)
+    a_a_up++;
+}
+
+void Brazo::armDown(){
+  if(a_a_up > 0)
+    a_a_up--;
+}
+
+void Brazo::armFront(){
+  if(a_a_front < a_a_front_max)
+    a_a_front++;
+}
+
+void Brazo::armBack(){
+  if(a_a_front > -1*a_a_front_max)
+    a_a_front--;
+}
+
+void Brazo::middleUp(){
+  if(a_e_up < a_e_up_max)
+    a_e_up++;
+}
+
+void Brazo::middleDown(){
+  if(a_e_up > 0)
+    a_e_up--;
+}
+
+void Brazo::middleR(){
+  if(a_e_r < a_e_r_max)
+    a_e_r++;
+}
+
+void Brazo::middleL(){
+  if(a_e_r > 0)
+    a_e_r--;
 }
